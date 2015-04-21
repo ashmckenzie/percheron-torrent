@@ -1,0 +1,38 @@
+---
+docker:
+  host: "https://boot2docker:2376"
+  ssl_verify_peer: false
+
+stacks:
+  -
+    name: torrent
+    containers:
+      -
+        name: base
+        version: 1.0.0
+        dockerfile: ./base/Dockerfile
+        startable: false
+
+      -
+        name: tracker
+        version: 1.0.0
+        dockerfile: ./tracker/Dockerfile
+        dependant_container_names:
+          - base
+
+      - name: seeder
+        instances: 1
+        version: 1.0.0
+        dockerfile: ./seeder/Dockerfile
+        dependant_container_names:
+          - base
+          - tracker
+
+      - name: peer
+        instances: 3
+        version: 1.0.0
+        dockerfile: ./peer/Dockerfile
+        dependant_container_names:
+          - base
+          - seeder
+          - tracker
