@@ -17,14 +17,14 @@ stacks:
         name: tracker
         version: 1.0.0
         dockerfile: ./tracker/Dockerfile
-        dependant_container_names:
+        dependant_unit_names:
           - base
 
       - name: seeder
         instances: 1
         version: 1.0.0
         dockerfile: ./seeder/Dockerfile
-        dependant_container_names:
+        dependant_unit_names:
           - base
           - tracker
 
@@ -32,7 +32,7 @@ stacks:
         instances: 3
         version: 1.0.0
         dockerfile: ./peer/Dockerfile
-        dependant_container_names:
+        dependant_unit_names:
           - base
           - seeder
           - tracker
