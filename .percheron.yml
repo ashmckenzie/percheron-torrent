@@ -8,7 +8,7 @@ stacks:
     units:
       - name: base
         version: 1.0.0
-        dockerfile: ./base/Dockerfile
+        dockerfile: ./_base/Dockerfile
         startable: false
 
       - name: tracker
