@@ -4,24 +4,20 @@ docker:
   ssl_verify_peer: false
 
 stacks:
-  -
-    name: torrent
+  - name: torrent
     units:
-      -
-        name: base
+      - name: base
         version: 1.0.0
         dockerfile: ./base/Dockerfile
         startable: false
 
-      -
-        name: tracker
+      - name: tracker
         version: 1.0.0
         dockerfile: ./tracker/Dockerfile
         dependant_unit_names:
           - base
 
       - name: seeder
-        instances: 1
         version: 1.0.0
         dockerfile: ./seeder/Dockerfile
         dependant_unit_names:
